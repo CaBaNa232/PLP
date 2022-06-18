@@ -1,0 +1,39 @@
+(defun Arvore_Binaria(Arvore)
+    (cond 
+         ((null Arvore) NIL)
+         ((< (list-length Arvore) 3) NIL)
+         (t)
+    )
+)
+
+
+(defun Filho_Esquerdo(Arvore)
+    (cond 
+         ((null Arvore) NIL)
+         ((not (listp Arvore)) NIL)
+         (t (car (cdr Arvore)))
+    )
+)
+
+(defun Filho_Direito(Arvore)
+    (cond 
+         ((null Arvore) NIL)
+         ((not (listp Arvore)) NIL)
+         (t (car (cdr (cdr Arvore))))
+    )
+)
+
+
+(defun Percurso_Natural(Arvore)
+    (if 
+        (not (Arvore_Binaria Arvore)) NIL
+            (append 
+                 (Percurso_Natural (Filho_Esquerdo Arvore))
+                 (list (car Arvore))
+                 (Percurso_Natural (Filho_Direito Arvore))
+            ) 
+    )
+)
+
+(Percurso_Natural `(40 (30 (25 () ()) (35 () ())) (60 (50 () ()) ())))
+(Percurso_Natural `(3 (2 (1 () ()) ()) (5 () ())))
